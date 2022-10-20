@@ -10,13 +10,6 @@ def Usage():
 def isTaskStart(poss , svcdump ):
     newTaskPoss = svcdump[poss:].find(bytearray([0x4e , 0x00 , 0x54 , 0x00 , 0x20 , 0x00 , 0x54 , 0x00 , 0x41 ,0x00 , 0x53 , 0x00 , 0x4b , 0x00 , 0x5c , 0x00 ]))
     return poss+newTaskPoss
-    #arrayHolder = array([x for x in svcdump[poss:poss+14]])
-    #isTask = (arrayHolder == [0x4e , 0x00 , 0x54 , 0x00 , 0x20 , 0x00 , 0x54 , 0x00 , 0x41 ,0x00 , 0x53 , 0x00 , 0x4b , 0x00 ])
-    #if(all(isTask)):
-#        print(str(svcdump[poss:poss+14].decode('utf-8')))
-    #    return 1 
-    #else : 
-    #    return 0
 
 def isTaskEnd(poss , nextposs , svcdump ):
     endcheck = svcdump[poss:nextposs].find(bytearray([ 0xd8 , 0x01 , 0x00  ]))
@@ -31,18 +24,6 @@ def isTaskEnd(poss , nextposs , svcdump ):
 
     return(poss)
 
-'''
-    while 1 :
-        if(svcdump[poss] == 0xd8):
-            arrayHolder = array([x for x in svcdump[poss:poss+2]])
-        #   print(arrayHolder)
-            isTask = (arrayHolder == [ 0xd8 , 0x01 , 0x00 , 0x00 ]) # , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00  , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 ])
-        #   realend = array([x for x in svcdump[poss+30:poss+34]])
-        #   isRealEnd = (realend == [0x00 , 0x00 , 0x00 , 0x00 ])
-            if(all(isTask) ): #and not all(isRealEnd)):
-                return poss+2
-        poss += 1 
-'''
 
 def Getoff(svcdump , taskStart , taskEnd):
     i = taskStart
@@ -68,14 +49,6 @@ def dubeCheck(svcdump , taskStart , taskEnd , Gsss):
     ch = (svcdump[taskStart:taskEnd]).find(bytearray(intGss))
     return(ch)
 
-#            arrayHolder = array([x for x in svcdump[i:i+4]])
-#            isTask = (arrayHolder == [0x00 , 0x00 , 0x00 , 0x00])
- 
- 
- #           if(not(any(isTask )) and svcdump[i+6] == 0 ):
- #               print(svcdump[i+6])
- #               sss = array([x for x in svcdump[i+3:i+6]])
- #               return sss
         
 def writetocsv(outputfolder , data = [] , header = [] ):
     if(header):
